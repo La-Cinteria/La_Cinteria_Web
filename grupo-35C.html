@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Seccion de cintos cocidos con 3.5cm de ancho</title>
+        <link rel="stylesheet" href="css/style_grupo.css">
+        <link rel="stylesheet" href="css/style_global.css">
+        <link rel="icon" type="image/png" href="image/Dibujo-cinto.png">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Parisienne&display=swap" rel="stylesheet">
+    </head>
+
+    <body data-grupo="36">
+        <!-- ===== HEADER ===== -->
+        <header>
+        <div class="logo">La Cintería</div>
+        </header>
+
+        <!-- ===== CONTENIDO PRINCIPAL ===== -->
+        <main class="container">
+            <!-- ===== NOMBRE DEL CINT0 ===== -->
+            <h1 class="product-title" id="prodNombre"></h1>
+
+            <!-- ===== CONTENIDO ===== -->
+            <section class="product-layout">
+
+            <!-- GALERÍA -->
+            <div class="slider">
+                <div class="slides" id="slides"></div>
+                <div class="dots" id="dots"></div>
+            </div>
+
+            <!-- INFO -->
+            <div class="product-info">
+
+                <p id="precioProducto"><strong>Precio:</strong> $</p>
+                <p><strong>Ancho:</strong> <span id="prodAncho"></span></p>
+
+                <!-- TALLE -->
+                <label>
+                <strong>Talle:</strong><br>
+                <input type="number" id="talle" placeholder="Ej: 95">
+                </label>
+
+                <p class="talle-ayuda">
+                ¿No sabés tu talle?
+                <a href="index.html#video">acá te explicamos</a>
+                </p>
+
+                <!-- HEBILLA -->
+                <div class="hebilla">
+                <strong>Hebilla:</strong><br>
+                <label>
+                    <input type="radio" name="hebilla" value="Bronce">
+                    Bronce
+                </label>
+                <label>
+                    <input type="radio" name="hebilla" value="Plateada">
+                    Plateada
+                </label>
+                </div>
+
+                <!-- COMPRAR -->
+                <button id="btn-comprar">Comprar</button>
+
+            </div>
+            </section>
+            <!-- MODAL FORMULARIO -->
+            <div id="modal" class="modal-overlay" style="display:none;">
+                <div class="modal-box">
+                    <div class="modal-header">
+                    <h3>Datos de envío — Correo Argentino</h3>
+                    <button id="cerrarModal" class="modal-cerrar">✕</button>
+                    </div>
+                    <!-- Resumen del pedido -->
+                    <div class="pedido-resumen" id="pedidoResumen"></div>
+                    <div class="modal-body">
+                    <div class="campo">
+                        <label>Nombre y apellido *</label>
+                        <input type="text" id="f_nombre" placeholder="Juan García" />
+                        <span class="error" id="err_nombre"></span>
+                    </div>
+                    <div class="campo">
+                        <label>DNI *</label>
+                        <input type="text" id="f_dni" placeholder="30123456" />
+                        <span class="error" id="err_dni"></span>
+                    </div>
+                    <div class="campo">
+                        <label>Teléfono *</label>
+                        <input type="text" id="f_telefono" placeholder="11 1234-5678" />
+                        <span class="error" id="err_telefono"></span>
+                    </div>
+                    <div class="campo">
+                        <label>Calle *</label>
+                        <input type="text" id="f_calle" placeholder="Av. Corrientes" />
+                        <span class="error" id="err_calle"></span>
+                    </div>
+                    <div class="campo-grupo">
+                        <div class="campo">
+                        <label>Número *</label>
+                        <input type="text" id="f_numero" placeholder="1234" />
+                        <span class="error" id="err_numero"></span>
+                        </div>
+                        <div class="campo">
+                        <label>Piso / Depto</label>
+                        <input type="text" id="f_piso" placeholder="3° B (opcional)" />
+                        </div>
+                    </div>
+                    <div class="campo">
+                        <label>Localidad *</label>
+                        <input type="text" id="f_localidad" placeholder="Buenos Aires" />
+                        <span class="error" id="err_localidad"></span>
+                    </div>
+                    <div class="campo-grupo">
+                        <div class="campo">
+                        <label>Provincia *</label>
+                        <input type="text" id="f_provincia" placeholder="Buenos Aires" />
+                        <span class="error" id="err_provincia"></span>
+                        </div>
+                        <div class="campo">
+                        <label>Código Postal *</label>
+                        <input type="text" id="f_cp" placeholder="1414" />
+                        <span class="error" id="err_cp"></span>
+                        </div>
+                    </div>
+                    <div id="avisoTalleHebilla" class="aviso-alerta" style="display:none;">
+                        ⚠️ Completá el talle y la hebilla antes de enviar.
+                    </div>
+                    <button id="btnEnviar" class="btn-whatsapp btn-lg">
+                        📲 Enviar pedido por WhatsApp
+                    </button>
+                    <p class="modal-nota">Se abrirá WhatsApp con todos los datos del pedido para confirmar.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script src="script/grupo.js"></script>
+    </body>
+
+</html>
