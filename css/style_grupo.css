@@ -22,6 +22,9 @@
   gap: 40px;
   margin-bottom: 50px;
 }
+.product-layout > *{
+    min-width:0;
+}
 
 /* ===============================
    GALERÍA
@@ -30,7 +33,7 @@
 .slider{
   position:relative;
 
-  width:420px;
+  width:min(420px,100%);
   max-width:100%;
 
   margin:auto;
@@ -122,6 +125,7 @@
     display:flex;
     justify-content:center;
     gap:10px;
+    flex-wrap:wrap;
 }
 
 .color-dot{
@@ -171,6 +175,8 @@
   font-size:18px;
   border-radius: 8px;
   background: #fff;
+  width:100%;
+  box-sizing:border-box;
 }
 
 .product-info p {
@@ -481,6 +487,10 @@
   }
 
   .slider-btn{
-        display:none;
-    }
+    display:none;
+  }
+}
+
+body{
+  overflow-x:hidden;
 }
