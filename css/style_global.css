@@ -41,9 +41,9 @@ body{
 
 /* ===== CONTAINER ===== */
 .container{
-  max-width:1200px;
+  width:min(95%, 1500px);
   margin:auto;
-  padding:0px;
+  padding:20px 30px 40px;
 }
 
 /* ===== RESPONSIVE ===== */
@@ -79,4 +79,49 @@ body{
 
 .product-info{
   font-size:14px;
+}
+
+/* ===== HEADER ===== */
+
+.header{
+  position: relative;
+}
+
+.home-btn{
+  position:absolute;
+  left:20px;
+  top:50%;
+  transform:translateY(-50%);
+
+  width:42px;
+  height:42px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  font-size:24px;
+  text-decoration:none;
+
+  background:#ffffff20;
+  border:2px solid #ccc;
+  border-radius:50%;
+
+  transition:.2s ease;
+}
+
+.home-btn:hover{
+  background:#fff;
+  transform:translateY(-50%) scale(1.08);
+}
+
+@media (max-width:600px){
+
+  .home-btn{
+    left:10px;
+    width:36px;
+    height:36px;
+    font-size:20px;
+  }
+
 }
