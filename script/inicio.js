@@ -11,7 +11,7 @@ fetch("data/productos.json")
             return `
             <a href="producto.html?modelo=${encodeURIComponent(p.id)}" class="category-card">
                 <div class="category-img">
-                    <img src="${esc(p.portada)}" alt="${esc(p.nombre)}" loading="lazy" width="900" height="1200">
+                    <img src="${esc(p.portada)}" alt="${esc(p.nombre)}" loading="lazy" width="900" height="900">
                 </div>
                 <div class="category-body">
                     <span class="category-tipo">${esc(p.tipo)}</span>
