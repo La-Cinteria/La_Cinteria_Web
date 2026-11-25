@@ -2,9 +2,9 @@
   "_ayuda": "Editá este archivo para cambiar la sección 'Nosotros' y 'Dónde encontrarnos'. Los campos que digan COMPLETAR se muestran tal cual en la página hasta que los cambies. Para agregar un puesto, copiá un bloque de 'puestos' completo. Si 'mapa' es true, se muestra un mapa de Google con la dirección. Para que el pin caiga justo en el puesto, podés poner 'coordenadas' (en Google Maps: clic derecho sobre el lugar exacto > se copian los números, ej. -34.6037, -58.3816).",
 
   "historia": [
-    "En La Cintería hacemos cintos de cuero 100% vacuno a mano, uno por uno, y a la medida de quien lo va a usar.",
+    "En La Cintería hacemos cada cinto a mano, uno por uno, pensando en quien lo va a usar.",
     "COMPLETAR (opcional): contá la historia del emprendimiento, desde cuándo lo hacen, quiénes son.",
-    "Podés acercarte al puesto a verlos, tocarlos y probarte el talle, o pedirlo desde esta web y te lo enviamos."
+    "Si no podés acercarte a una feria, lo pedís desde la web y te lo enviamos."
   ],
 
   "fotos": [
