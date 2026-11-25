@@ -1,0 +1,32 @@
+{
+  "_ayuda": "Editá este archivo para cambiar la sección 'Nosotros' y 'Dónde encontrarnos'. Los campos que digan COMPLETAR se muestran tal cual en la página hasta que los cambies. Para agregar un puesto, copiá un bloque de 'puestos' completo. Si 'mapa' es true, se muestra un mapa de Google con la dirección.",
+
+  "historia": [
+    "En La Cintería hacemos cintos de cuero 100% vacuno a mano, uno por uno, y a la medida de quien lo va a usar.",
+    "COMPLETAR (opcional): contá la historia del emprendimiento, desde cuándo lo hacen, quiénes son.",
+    "Podés acercarte al puesto a verlos, tocarlos y probarte el talle, o pedirlo desde esta web y te lo enviamos."
+  ],
+
+  "fotos": [
+    { "src": "image/FotoPuesto.webp", "alt": "Puesto de La Cintería con cintos de cuero de distintos colores" }
+  ],
+
+  "puestos": [
+    {
+      "nombre": "COMPLETAR: nombre de la feria",
+      "direccion": "COMPLETAR: calle y número, localidad",
+      "dias": "COMPLETAR: ej. Sábados y domingos",
+      "horario": "COMPLETAR: ej. 10 a 19 h",
+      "nota": "",
+      "mapa": false
+    }
+  ],
+
+  "en_el_puesto": [
+    "Ver y tocar el cuero antes de elegir",
+    "Probarte el talle en el momento",
+    "Elegir entre todos los colores y hebillas"
+  ],
+
+  "instagram": ""
+}

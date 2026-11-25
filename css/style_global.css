@@ -33,6 +33,10 @@ html{
   scroll-behavior:smooth;
 }
 
+[hidden]{
+  display:none !important;
+}
+
 /* ==== GENERAL ==== */
 body{
   margin:0;
@@ -104,11 +108,38 @@ header::after{
   padding:18px 0 24px;
 }
 
+/* ===== MENÚ ===== */
+.nav{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:4px 28px;
+  margin-top:-12px;
+  padding:0 16px 22px;
+}
+
+.nav a{
+  color:#e9d6bf;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:1.8px;
+  text-transform:uppercase;
+  text-decoration:none;
+  padding:4px 0;
+  border-bottom:1.5px solid transparent;
+  transition:color .2s, border-color .2s;
+}
+
+.nav a:hover{
+  color:#fff;
+  border-color:var(--caramelo-claro);
+}
+
 /* ===== BOTÓN VOLVER ===== */
 .home-btn{
   position:absolute;
   left:20px;
-  top:calc(50% - 3px);
+  top:45px;
   transform:translateY(-50%);
   z-index:2;
 
@@ -196,6 +227,11 @@ header::after{
   color:#fff;
 }
 
+.btn-chico{
+  padding:10px 20px;
+  font-size:14px;
+}
+
 .btn svg{
   width:18px;
   height:18px;
@@ -260,11 +296,79 @@ header::after{
   opacity:.7;
 }
 
+/* ===== WHATSAPP FLOTANTE ===== */
+.wa-flotante{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:900;
+
+  width:58px;
+  height:58px;
+  display:grid;
+  place-items:center;
+
+  border-radius:50%;
+  background:#25D366;
+  color:#fff;
+  box-shadow:0 6px 18px rgba(0,0,0,.25);
+
+  transition:transform .2s ease, box-shadow .2s ease;
+  animation:wa-entrar .4s ease .6s both;
+}
+
+.wa-flotante svg{
+  width:30px;
+  height:30px;
+}
+
+.wa-flotante:hover{
+  transform:scale(1.08);
+  box-shadow:0 10px 24px rgba(37,211,102,.45);
+}
+
+@keyframes wa-entrar{
+  from{ opacity:0; transform:translateY(20px) scale(.8); }
+  to{ opacity:1; transform:none; }
+}
+
+/* ===== DATOS SIN CARGAR / ERRORES ===== */
+/* Marca en amarillo los textos que empiezan con "COMPLETAR" en los JSON */
+.pendiente{
+  background:#fff3c4;
+  outline:1.5px dashed #d4a72c;
+  border-radius:4px;
+  padding:0 4px;
+}
+
+.error-carga{
+  grid-column:1 / -1;
+  text-align:center;
+  color:var(--texto-suave);
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width:768px){
 
   .logo{
-    padding:14px 0 20px;
+    padding:14px 0 18px;
+  }
+
+  .nav{
+    gap:2px 18px;
+    padding-bottom:20px;
+  }
+
+  .nav a{
+    font-size:12px;
+    letter-spacing:1.2px;
+  }
+
+  .wa-flotante{
+    right:14px;
+    bottom:14px;
+    width:54px;
+    height:54px;
   }
 
   .container{
@@ -272,6 +376,7 @@ header::after{
   }
 
   .home-btn{
+    top:34px;
     left:12px;
     width:38px;
     height:38px;

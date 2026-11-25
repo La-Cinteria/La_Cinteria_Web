@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página no encontrada — La Cintería</title>
+    <meta name="robots" content="noindex">
+    <script>
+        // GitHub Pages muestra esta página para cualquier dirección que no existe.
+        // 1) Calcula la raíz del sitio (en github.io es /La_Cinteria_Web/).
+        // 2) Si alguien entra con un link viejo (grupo-25.html, etc.), lo manda a la página nueva.
+        var raiz = location.hostname.endsWith("github.io")
+            ? "/" + location.pathname.split("/")[1] + "/"
+            : "/";
+        var viejos = {
+            "grupo-25": "25", "grupo-30": "30", "grupo-35": "35", "grupo-40": "40",
+            "grupo-30c": "30-cocido", "grupo-35c": "35-cocido", "grupo-circulos": "circulos"
+        };
+        var m = location.pathname.match(/(grupo-[a-z0-9]+)\.html$/i);
+        if (m && viejos[m[1].toLowerCase()]) {
+            location.replace(raiz + "producto.html?modelo=" + viejos[m[1].toLowerCase()]);
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Lato:wght@400;700&family=Parisienne&display=swap" rel="stylesheet">
+    <style>
+        body{margin:0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+             padding:24px;box-sizing:border-box;text-align:center;background:#f7f1e8;color:#2b1d14;font-family:Lato,Arial,sans-serif}
+        .logo{font-family:Parisienne,cursive;font-size:52px;color:#5e361b;text-decoration:none}
+        h1{margin:10px 0 0;font-family:"Cormorant Garamond",Georgia,serif;font-size:36px;font-weight:600;color:#3b2112}
+        p{margin:4px 0 22px;color:#6e5a4b}
+        .btn{display:inline-block;padding:13px 26px;border-radius:999px;background:#5e361b;color:#fff;font-weight:700;text-decoration:none}
+        .btn:hover{background:#734325}
+    </style>
+</head>
+<body>
+    <a class="logo js-inicio" href="/">La Cintería</a>
+    <h1>No encontramos esta página</h1>
+    <p>Puede que el link esté mal escrito o que la página ya no exista.</p>
+    <a class="btn js-inicio" href="/">Volver al inicio</a>
+    <script>
+        document.querySelectorAll(".js-inicio").forEach(function (a) { a.href = raiz; });
+    </script>
+</body>
+</html>

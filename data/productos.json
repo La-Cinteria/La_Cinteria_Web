@@ -1,11 +1,11 @@
 {
   "productos": [
     {
-      "grupo": "25",
+      "id": "25",
+      "tipo": "Liso",
       "paso": 2.5,
       "nombre": "Cinto de cuero 2.5cm",
       "precio": 18000,
-
       "colores": [
         {
           "nombre": "negro",
@@ -16,48 +16,61 @@
           "hex": "#6b3e26"
         },
         {
-          "nombre":"crudo",
-          "hex":"#b4764f"
+          "nombre": "crudo",
+          "hex": "#b4764f"
         },
         {
-          "nombre":"naranja",
-          "hex":"#a5450f"
+          "nombre": "naranja",
+          "hex": "#a5450f"
         },
         {
-          "nombre":"rojo",
-          "hex":"#720500"
+          "nombre": "rojo",
+          "hex": "#720500"
         },
         {
-          "nombre":"azul",
-          "hex":"#002a5e"
+          "nombre": "azul",
+          "hex": "#002a5e"
         },
         {
-          "nombre":"verde",
-          "hex":"#00543d"
+          "nombre": "verde",
+          "hex": "#00543d"
         }
       ],
-
       "fotos": {
-        "negro": ["image/Cinto-negro-25.jpeg"],
-        "marron": ["image/Cinto-marron-25.jpeg"],
-        "crudo": ["image/Cinto-crudo-25.jpeg"],
-        "naranja": ["image/Cinto-naranja-25.jpeg"],
-        "rojo": ["image/Cinto-rojo-25.jpeg"],
-        "azul": ["image/Cinto-azul-25.jpeg"],
-        "verde":["image/Cinto-verde-25.jpeg"]
+        "negro": [
+          "image/Cinto-negro-25.webp"
+        ],
+        "marron": [
+          "image/Cinto-marron-25.webp"
+        ],
+        "crudo": [
+          "image/Cinto-crudo-25.webp"
+        ],
+        "naranja": [
+          "image/Cinto-naranja-25.webp"
+        ],
+        "rojo": [
+          "image/Cinto-rojo-25.webp"
+        ],
+        "azul": [
+          "image/Cinto-azul-25.webp"
+        ],
+        "verde": [
+          "image/Cinto-verde-25.webp"
+        ]
       },
-
       "hebillas": [
         "Bronce",
         "Plateada"
-      ]
+      ],
+      "portada": "image/Cinto-marron-25.webp"
     },
     {
-      "grupo": "30",
+      "id": "30",
+      "tipo": "Liso",
       "paso": 3,
       "nombre": "Cinto de cuero 3.0cm",
       "precio": 20000,
-
       "colores": [
         {
           "nombre": "negro",
@@ -68,48 +81,191 @@
           "hex": "#6b3e26"
         },
         {
-          "nombre":"crudo",
-          "hex":"#b4764f"
+          "nombre": "crudo",
+          "hex": "#b4764f"
         },
         {
-          "nombre":"naranja",
-          "hex":"#a5450f"
+          "nombre": "naranja",
+          "hex": "#a5450f"
         },
         {
-          "nombre":"rojo",
-          "hex":"#720500"
+          "nombre": "rojo",
+          "hex": "#720500"
         },
         {
-          "nombre":"azul",
-          "hex":"#002a5e"
+          "nombre": "azul",
+          "hex": "#002a5e"
         },
         {
-          "nombre":"verde",
-          "hex":"#00543d"
+          "nombre": "verde",
+          "hex": "#00543d"
         }
       ],
-
       "fotos": {
-        "negro": ["image/Cinto-negro-30.jpeg"],
-        "marron": ["image/Cinto-marron-30.jpeg"],
-        "crudo": ["image/Cinto-crudo-30.jpeg"],
-        "naranja": ["image/Cinto-naranja-30.jpeg"],
-        "rojo": ["image/Cinto-rojo-30.jpeg"],
-        "azul": ["image/Cinto-azul-30.jpeg"],
-        "verde":["image/Cinto-verde-30.jpeg"]
+        "negro": [
+          "image/Cinto-negro-30.webp"
+        ],
+        "marron": [
+          "image/Cinto-marron-30.webp"
+        ],
+        "crudo": [
+          "image/Cinto-crudo-30.webp"
+        ],
+        "naranja": [
+          "image/Cinto-naranja-30.webp"
+        ],
+        "rojo": [
+          "image/Cinto-rojo-30.webp"
+        ],
+        "azul": [
+          "image/Cinto-azul-30.webp"
+        ],
+        "verde": [
+          "image/Cinto-verde-30.webp"
+        ]
       },
-
       "hebillas": [
         "Bronce",
         "Plateada"
-      ]
+      ],
+      "portada": "image/Cinto-marron-30.webp"
     },
     {
-      "grupo": "31",
+      "id": "35",
+      "tipo": "Liso",
+      "paso": 3.5,
+      "nombre": "Cinto de cuero 3.5cm",
+      "precio": 23000,
+      "colores": [
+        {
+          "nombre": "negro",
+          "hex": "#000000"
+        },
+        {
+          "nombre": "marron",
+          "hex": "#6b3e26"
+        },
+        {
+          "nombre": "crudo",
+          "hex": "#b4764f"
+        },
+        {
+          "nombre": "naranja",
+          "hex": "#a5450f"
+        },
+        {
+          "nombre": "rojo",
+          "hex": "#720500"
+        },
+        {
+          "nombre": "azul",
+          "hex": "#002a5e"
+        },
+        {
+          "nombre": "verde",
+          "hex": "#00543d"
+        }
+      ],
+      "fotos": {
+        "negro": [
+          "image/Cinto-negro-35.webp"
+        ],
+        "marron": [
+          "image/Cinto-marron-35.webp"
+        ],
+        "crudo": [
+          "image/Cinto-crudo-35.webp"
+        ],
+        "naranja": [
+          "image/Cinto-naranja-35.webp"
+        ],
+        "rojo": [
+          "image/Cinto-rojo-35.webp"
+        ],
+        "azul": [
+          "image/Cinto-azul-35.webp"
+        ],
+        "verde": [
+          "image/Cinto-verde-35.webp"
+        ]
+      },
+      "hebillas": [
+        "Bronce",
+        "Plateada"
+      ],
+      "portada": "image/Cinto-marron-35.webp"
+    },
+    {
+      "id": "40",
+      "tipo": "Liso",
+      "paso": 4,
+      "nombre": "Cinto de cuero 4.0cm",
+      "precio": 35000,
+      "colores": [
+        {
+          "nombre": "negro",
+          "hex": "#000000"
+        },
+        {
+          "nombre": "marron",
+          "hex": "#6b3e26"
+        },
+        {
+          "nombre": "crudo",
+          "hex": "#b4764f"
+        },
+        {
+          "nombre": "naranja",
+          "hex": "#a5450f"
+        },
+        {
+          "nombre": "rojo",
+          "hex": "#720500"
+        },
+        {
+          "nombre": "azul",
+          "hex": "#002a5e"
+        },
+        {
+          "nombre": "verde",
+          "hex": "#00543d"
+        }
+      ],
+      "fotos": {
+        "negro": [
+          "image/Cinto-negro-40.webp"
+        ],
+        "marron": [
+          "image/Cinto-marron-40.webp"
+        ],
+        "crudo": [
+          "image/Cinto-crudo-40.webp"
+        ],
+        "naranja": [
+          "image/Cinto-naranja-40.webp"
+        ],
+        "rojo": [
+          "image/Cinto-rojo-40.webp"
+        ],
+        "azul": [
+          "image/Cinto-azul-40.webp"
+        ],
+        "verde": [
+          "image/Cinto-verde-40.webp"
+        ]
+      },
+      "hebillas": [
+        "Bronce",
+        "Plateada"
+      ],
+      "portada": "image/Cinto-marron-40.webp"
+    },
+    {
+      "id": "30-cocido",
+      "tipo": "Cocido",
       "paso": 3,
       "nombre": "Cinto de cuero cocido 3.0cm",
       "precio": 23000,
-
       "colores": [
         {
           "nombre": "negro cocido con negro",
@@ -120,75 +276,26 @@
           "hex": "#6b3e26"
         }
       ],
-
       "fotos": {
-        "negro cocido con negro": ["image/Cinto-negro-30-cocido-con-negro.jpeg"],
-        "marron cocido con amarillo": ["image/Cinto-marron-30-cocido.jpeg"]
+        "negro cocido con negro": [
+          "image/Cinto-negro-30-cocido-con-negro.webp"
+        ],
+        "marron cocido con amarillo": [
+          "image/Cinto-marron-30-cocido.webp"
+        ]
       },
-
       "hebillas": [
         "Bronce",
         "Plateada"
-      ]
-    },
-    {
-      "grupo": "35",
-      "paso": 3.5,
-      "nombre": "Cinto de cuero 3.5cm",
-      "precio": 23000,
-
-      "colores": [
-        {
-          "nombre": "negro",
-          "hex": "#000000"
-        },
-        {
-          "nombre": "marron",
-          "hex": "#6b3e26"
-        },
-        {
-          "nombre":"crudo",
-          "hex":"#b4764f"
-        },
-        {
-          "nombre":"naranja",
-          "hex":"#a5450f"
-        },
-        {
-          "nombre":"rojo",
-          "hex":"#720500"
-        },
-        {
-          "nombre":"azul",
-          "hex":"#002a5e"
-        },
-        {
-          "nombre":"verde",
-          "hex":"#00543d"
-        }
       ],
-
-      "fotos": {
-        "negro": ["image/Cinto-negro-35.jpeg"],
-        "marron": ["image/Cinto-marron-35.jpeg"],
-        "crudo": ["image/Cinto-crudo-35.jpeg"],
-        "naranja": ["image/Cinto-naranja-35.jpeg"],
-        "rojo": ["image/Cinto-rojo-35.jpeg"],
-        "azul": ["image/Cinto-azul-35.jpeg"],
-        "verde":["image/Cinto-verde-35.jpeg"]
-      },
-
-      "hebillas": [
-        "Bronce",
-        "Plateada"
-      ]
+      "portada": "image/Cinto-marron-30-cocido.webp"
     },
     {
-      "grupo": "36",
+      "id": "35-cocido",
+      "tipo": "Cocido",
       "paso": 3.5,
       "nombre": "Cinto de cuero cocido 3.5cm",
       "precio": 28000,
-
       "colores": [
         {
           "nombre": "negro cocido con negro",
@@ -203,77 +310,29 @@
           "hex": "#6b3e26"
         }
       ],
-
       "fotos": {
-        "negro cocido con negro": ["image/Cinto-negro-35-cocido-con-negro.jpeg"],
-        "negro cocido con amarillo": ["image/Cinto-negro-35-cocido-con-amarillo.jpeg"],
-        "marron cocido con amarillo": ["image/Cinto-marron-35-cocido.jpeg"]
+        "negro cocido con negro": [
+          "image/Cinto-negro-35-cocido-con-negro.webp"
+        ],
+        "negro cocido con amarillo": [
+          "image/Cinto-negro-35-cocido-con-amarillo.webp"
+        ],
+        "marron cocido con amarillo": [
+          "image/Cinto-marron-35-cocido.webp"
+        ]
       },
-
       "hebillas": [
         "Bronce",
         "Plateada"
-      ]
-    },
-
-    {
-      "grupo": "40",
-      "paso": 4,
-      "nombre": "Cinto de cuero 4.0cm",
-      "precio": 35000,
-
-      "colores": [
-        {
-          "nombre": "negro",
-          "hex": "#000000"
-        },
-        {
-          "nombre": "marron",
-          "hex": "#6b3e26"
-        },
-        {
-          "nombre":"crudo",
-          "hex":"#b4764f"
-        },
-        {
-          "nombre":"naranja",
-          "hex":"#a5450f"
-        },
-        {
-          "nombre":"rojo",
-          "hex":"#720500"
-        },
-        {
-          "nombre":"azul",
-          "hex":"#002a5e"
-        },
-        {
-          "nombre":"verde",
-          "hex":"#00543d"
-        }
       ],
-
-      "fotos": {
-        "negro": ["image/Cinto-negro-40.jpeg"],
-        "marron": ["image/Cinto-marron-40.jpeg"],
-        "crudo": ["image/Cinto-crudo-40.jpeg"],
-        "naranja": ["image/Cinto-naranja-40.jpeg"],
-        "rojo": ["image/Cinto-rojo-40.jpeg"],
-        "azul": ["image/Cinto-azul-40.jpeg"],
-        "verde":["image/Cinto-verde-40.jpeg"]
-      },
-
-      "hebillas": [
-        "Bronce",
-        "Plateada"
-      ]
+      "portada": "image/Cinto-marron-35-cocido.webp"
     },
     {
-      "grupo": "100",
+      "id": "circulos",
+      "tipo": "Especial",
       "paso": "Especial",
-      "nombre": "Cinto de circulos con hebilla ornamental",
-      "precio": " Consúltenos",
-
+      "nombre": "Cinto de círculos con hebilla ornamental",
+      "precio": "Consultar precio",
       "colores": [
         {
           "nombre": "marron",
@@ -288,18 +347,22 @@
           "hex": "#720500"
         }
       ],
-
       "fotos": {
-        "marron": ["image/Cinto-de-circulos-marron-con-hebilla-ornamental.jpeg"],
-        "peluche": ["image/Cinto-especial1.jpeg"],
-        "escamas": ["image/Cinto-especial2.jpeg"]
+        "marron": [
+          "image/Cinto-de-circulos-marron-con-hebilla-ornamental.webp"
+        ],
+        "peluche": [
+          "image/Cinto-especial1.webp"
+        ],
+        "escamas": [
+          "image/Cinto-especial2.webp"
+        ]
       },
-
       "hebillas": [
         "Bronce",
         "Plateada"
-      ]
+      ],
+      "portada": "image/Cinto-de-circulos-con-hebilla-ornamental-presen.webp"
     }
-
   ]
 }
