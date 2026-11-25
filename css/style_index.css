@@ -68,6 +68,7 @@
   z-index:1;
   display:block;
   width:100%;
+  height:auto;
   aspect-ratio:1 / 1;
   object-fit:cover;
   border-radius:var(--radio);
@@ -195,6 +196,7 @@
 .category-card img{
   display:block;
   width:100%;
+  height:auto;
   aspect-ratio:1 / 1;
   object-fit:cover;
   transition:transform .5s ease;
