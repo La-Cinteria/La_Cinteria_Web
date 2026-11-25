@@ -7,7 +7,7 @@ fetch("data/productos.json")
     .then(res => res.json())
     .then(({ productos }) => {
         document.getElementById("modelosGrid").innerHTML = productos.map(p => {
-            const titulo = p.tipo === "Especial" ? p.nombre : `Paso ${p.paso} cm`;
+            const titulo = p.titulo_tarjeta || `Paso ${p.paso} cm`;
             return `
             <a href="producto.html?modelo=${encodeURIComponent(p.id)}" class="category-card">
                 <div class="category-img">

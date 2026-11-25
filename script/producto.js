@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <a href="producto.html?modelo=${encodeURIComponent(p.id)}" class="otro-card">
                 <img src="${esc(p.portada)}" alt="${esc(p.nombre)}" loading="lazy">
                 <span class="otro-tipo">${esc(p.tipo)}</span>
-                <span class="otro-nombre">${esc(p.tipo === "Especial" ? p.nombre : `Paso ${p.paso} cm`)}</span>
+                <span class="otro-nombre">${esc(p.titulo_tarjeta || `Paso ${p.paso} cm`)}</span>
             </a>`).join("");
         $("otrosModelos").hidden = false;
     }
