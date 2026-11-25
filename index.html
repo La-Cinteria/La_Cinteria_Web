@@ -3,98 +3,173 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - La Cintería</title>
-    <link rel="stylesheet" href="css/style_index.css">
-    <link rel="stylesheet" href="css/style_global.css">
+    <title>La Cintería — Cintos artesanales de cuero a medida</title>
+    <meta name="description" content="Cintos artesanales de cuero 100% vacuno hechos a medida. Elegí ancho, color y hebilla, y hacé tu pedido por WhatsApp.">
+    <meta name="theme-color" content="#5e361b">
     <link rel="icon" type="image/png" href="image/Dibujo-cinto.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Parisienne&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,600&family=Lato:wght@400;700&family=Parisienne&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style_global.css">
+    <link rel="stylesheet" href="css/style_index.css">
   </head>
 
   <body>
 
     <!-- ===== LOGO ===== -->
     <header>
-      <div class="logo">La Cintería</div>
+      <a href="index.html" class="logo">La Cintería</a>
     </header>
 
-    <div class="container">
-      <h1>
-        Cintos artesanales de cuero<br>
-        <span class="destacado">100% vacuno</span> hechos a medida
-      </h1>
+    <main class="container">
 
-      <!-- ===== FOTO DEL PUESTO ===== -->
-      <div class="foto-puesto-section">
-        <img src="image/FotoPuesto.png" alt="Puesto de La Cintería">
+      <!-- ===== HERO ===== -->
+      <section class="hero">
+        <div class="hero-texto">
+          <p class="eyebrow">Hecho a mano</p>
+          <h1>
+            Cintos artesanales de cuero
+            <span class="destacado">100% vacuno</span>, hechos a medida
+          </h1>
+          <p class="lead">
+            Elegí el ancho, el color y la hebilla. Nosotros lo hacemos a tu talle.
+          </p>
+          <div class="hero-botones">
+            <a href="#modelos" class="btn btn-primario">Ver modelos</a>
+            <a href="https://wa.me/5491157270544" target="_blank" rel="noopener" class="btn btn-secundario">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zm8.4-18.2A11.8 11.8 0 0 0 1.7 17.8L0 24l6.3-1.7A11.8 11.8 0 0 0 24 12c0-3.2-1.2-6.1-3.6-8.4z"/></svg>
+              Consultar por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- ===== FOTO DEL PUESTO ===== -->
+        <figure class="hero-foto">
+          <img src="image/FotoPuesto.png" alt="Puesto de La Cintería con cintos de cuero de distintos colores">
+        </figure>
+      </section>
+
+      <!-- ===== BENEFICIOS ===== -->
+      <ul class="beneficios">
+        <li>
+          <span class="beneficio-icono">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg>
+          </span>
+          <span><strong>Cuero 100% vacuno</strong><span class="sub">Materiales nobles que duran años.</span></span>
+        </li>
+        <li>
+          <span class="beneficio-icono">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h18v8H3z"/><path d="M7 8v3M11 8v4M15 8v3M19 8v4"/></svg>
+          </span>
+          <span><strong>Hecho a tu medida</strong><span class="sub">Nos pasás tu talle y lo hacemos justo.</span></span>
+        </li>
+        <li>
+          <span class="beneficio-icono">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"/></svg>
+          </span>
+          <span><strong>Pedido por WhatsApp</strong><span class="sub">Simple, directo y con atención personal.</span></span>
+        </li>
+      </ul>
+
+      <!-- ===== CATEGORIA DE CINTO (ANCHO) ===== -->
+      <div class="seccion-titulo" id="modelos">
+        <h2>Elegí tu modelo</h2>
+        <p>Cada ancho viene en distintos colores, con hebilla bronce o plateada.</p>
       </div>
 
-      <!-- ===== VIDEO + TEXTO ===== -->
-      
-      <!-- =====
-      <div class="video-section">
+      <div class="categories-grid">
 
+        <a href="grupo-25.html" class="category-card">
+          <div class="category-img"><img src="image/Cinto-marron-25.jpeg" alt="Cinto marrón de 2.5 cm de ancho" loading="lazy"></div>
+          <div class="category-body">
+            <span class="category-tipo">Liso</span>
+            <span class="category-title">Paso 2.5 cm</span>
+            <span class="category-link">Ver colores <span>→</span></span>
+          </div>
+        </a>
+
+        <a href="grupo-30.html" class="category-card">
+          <div class="category-img"><img src="image/Cinto-marron-30.jpeg" alt="Cinto marrón de 3 cm de ancho" loading="lazy"></div>
+          <div class="category-body">
+            <span class="category-tipo">Liso</span>
+            <span class="category-title">Paso 3 cm</span>
+            <span class="category-link">Ver colores <span>→</span></span>
+          </div>
+        </a>
+
+        <a href="grupo-35.html" class="category-card">
+          <div class="category-img"><img src="image/Cinto-marron-35.jpeg" alt="Cinto marrón de 3.5 cm de ancho" loading="lazy"></div>
+          <div class="category-body">
+            <span class="category-tipo">Liso</span>
+            <span class="category-title">Paso 3.5 cm</span>
+            <span class="category-link">Ver colores <span>→</span></span>
+          </div>
+        </a>
+
+        <a href="grupo-40.html" class="category-card">
+          <div class="category-img"><img src="image/Cinto-marron-40.jpeg" alt="Cinto marrón de 4 cm de ancho" loading="lazy"></div>
+          <div class="category-body">
+            <span class="category-tipo">Liso</span>
+            <span class="category-title">Paso 4 cm</span>
+            <span class="category-link">Ver colores <span>→</span></span>
+          </div>
+        </a>
+
+        <a href="grupo-30C.html" class="category-card">
+          <div class="category-img"><img src="image/Cinto-marron-30-cocido.jpeg" alt="Cinto marrón cocido de 3 cm de ancho" loading="lazy"></div>
+          <div class="category-body">
+            <span class="category-tipo">Cocido</span>
+            <span class="category-title">Paso 3 cm</span>
+            <span class="category-link">Ver colores <span>→</span></span>
+          </div>
+        </a>
+
+        <a href="grupo-35C.html" class="category-card">
+          <div class="category-img"><img src="image/Cinto-marron-35-cocido.jpeg" alt="Cinto marrón cocido de 3.5 cm de ancho" loading="lazy"></div>
+          <div class="category-body">
+            <span class="category-tipo">Cocido</span>
+            <span class="category-title">Paso 3.5 cm</span>
+            <span class="category-link">Ver colores <span>→</span></span>
+          </div>
+        </a>
+
+        <a href="grupo-circulos.html" class="category-card">
+          <div class="category-img"><img src="image/Cinto-de-circulos-con-hebilla-ornamental-presen.jpeg" alt="Cinto de círculos con hebilla ornamental" loading="lazy"></div>
+          <div class="category-body">
+            <span class="category-tipo">Especial</span>
+            <span class="category-title">Cinto de círculos</span>
+            <span class="category-link">Ver colores <span>→</span></span>
+          </div>
+        </a>
+
+      </div>
+
+      <!-- ===== VIDEO (pendiente) =====
+      <div class="video-section">
         <div class="video-box">
           <video controls>
             <source src="video/Video-Explicativo-Temp.mp4" type="video/mp4">
           </video>
         </div>
-
         <div class="text-box">
           <h2>Cómo medirte correctamente</h2>
-          <p>
-            Texto explicativo de como medirte: <br>
-            1°: Agarras ambos extremos del centímetro <br>
-            2°: Ves en donde se juntan  <br>
-            3°: ... <br>
-            ...
-          </p>
+          <p>...</p>
         </div>
-
       </div>
       ===== -->
 
-      <!-- ===== CATEGORIA DE CINTO (ANCHO) ===== -->
-      <div class="categories-grid">
+    </main>
 
-      <a href="grupo-25.html" class="category-card">
-        <img src="image/Cinto-marron-25.jpeg" alt="Cinto marrón de 2.5cm de ancho">
-        <div class="category-title">Cintos paso 2.5 cm</div>
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <div class="footer-logo">La Cintería</div>
+      <p>Cintos artesanales de cuero 100% vacuno</p>
+      <a href="https://wa.me/5491157270544" target="_blank" rel="noopener" class="footer-wa">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zm8.4-18.2A11.8 11.8 0 0 0 1.7 17.8L0 24l6.3-1.7A11.8 11.8 0 0 0 24 12c0-3.2-1.2-6.1-3.6-8.4z"/></svg>
+        Escribinos por WhatsApp
       </a>
-
-      <a href="grupo-30.html" class="category-card">
-        <img src="image/Cinto-marron-30.jpeg" alt="Cinto marrón de 3.0cm de ancho">
-        <div class="category-title">Cintos paso 3 cm</div>
-      </a>
-
-      <a href="grupo-30C.html" class="category-card">
-        <img src="image/Cinto-marron-30-cocido.jpeg" alt="Cinto marrón cocido de 3cm de ancho">
-        <div class="category-title">Cintos cocidos paso 3 cm</div>
-      </a>
-
-      <a href="grupo-35.html" class="category-card">
-        <img src="image/Cinto-marron-35.jpeg" alt="Cinto marrón de 3.5cm de ancho">
-        <div class="category-title">Cintos paso 3.5 cm</div>
-      </a>
-
-      <a href="grupo-35C.html" class="category-card">
-        <img src="image/Cinto-marron-35-cocido.jpeg" alt="Cinto marrón cocido de 3.5cm de ancho">
-        <div class="category-title">Cintos cocidos paso 3.5 cm</div>
-      </a>
-
-      <a href="grupo-40.html" class="category-card">
-        <img src="image/Cinto-marron-40.jpeg" alt="Cinto marrón de 4.0cm de ancho">
-        <div class="category-title">Cintos paso 4 cm</div>
-      </a>
-
-      <a href="grupo-circulos.html" class="category-card">
-        <img src="image/Cinto-de-circulos-con-hebilla-ornamental-presen.jpeg" alt="Cinto de círculos con hebilla ornamental">
-        <div class="category-title">Cinto especial</div>
-      </a>
-
-      
-
-    </div>
+      <p class="footer-copy">© 2026 La Cintería</p>
+    </footer>
 
   </body>
 </html>

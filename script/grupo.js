@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("input", function(e){
         if(e.target.id === "talle"){
             talle = e.target.value;
+            if (talle) ocultarAviso();
         }
     });
 
@@ -21,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("change", function(e){
         if(e.target.name === "hebilla"){
             hebilla = e.target.value;
+            ocultarAviso();
         }
     });
 
@@ -60,26 +62,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // TEXTO PRODUCTO 
         document.getElementById("prodNombre").textContent = productoActivo.nombre;
-        document.getElementById("precioProducto").innerHTML = "<strong>Precio:</strong> $" + productoActivo.precio;
-        if (productoActivo.paso == "Especial"){
-            document.getElementById("prodAncho").textContent = productoActivo.paso
-        }
-        else{
-            document.getElementById("prodAncho").textContent = productoActivo.paso + " cm";
-        }
-        
+        document.getElementById("precioProducto").textContent = "$" + productoActivo.precio.toLocaleString("es-AR");
+        document.getElementById("prodAncho").textContent = textoAncho();
+        document.getElementById("prodColor").textContent = colorSeleccionado;
 
         // IMAGEN
-        slides.innerHTML = `<img src="${productoActivo.fotos[colorSeleccionado][0]}" class="slide active">`;
+        slides.innerHTML = `<img src="${productoActivo.fotos[colorSeleccionado][0]}" class="slide active" alt="${productoActivo.nombre} color ${colorSeleccionado}" draggable="false">`;
 
         // DOTS (uno por color)
         dots.innerHTML = colores.map(c => `
-        <span 
+        <span
             class="dot ${c.nombre === colorSeleccionado ? 'activo' : ''}"
             style="background:${c.hex}"
+            title="${c.nombre}"
+            role="button"
+            aria-label="Color ${c.nombre}"
             onclick="cambiarColor('${c.nombre}')"
         ></span>
         `).join("");
+    }
+
+    function textoAncho() {
+        return productoActivo.paso == "Especial" ? "Especial" : productoActivo.paso + " cm";
+    }
+
+    // ── Aviso en la ficha (reemplaza los alert) ───────
+    const avisoCompra = document.getElementById("avisoCompra");
+    function mostrarAviso(texto) {
+        avisoCompra.textContent = texto;
+        avisoCompra.hidden = false;
+    }
+    function ocultarAviso() {
+        avisoCompra.hidden = true;
     }
     // ── Acciones carrusel ──────────────────────────────
     function anteriorFoto() {
@@ -124,14 +138,16 @@ document.addEventListener("DOMContentLoaded", () => {
     function abrirModal() {
         // Validar talle y hebilla antes de abrir
         if (!talle) {
-            alert("Ingresá tu talle antes de comprar");
+            mostrarAviso("Ingresá tu talle antes de comprar.");
+            document.getElementById("talle").focus();
             return;
         }
 
         if (!hebilla) {
-            alert("Seleccioná una hebilla antes de comprar");
+            mostrarAviso("Elegí una hebilla antes de comprar.");
             return;
         }
+        ocultarAviso();
         // Resumen
         document.getElementById("pedidoResumen").innerHTML = `
         <p><strong>Tu pedido:</strong></p>
@@ -196,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `*Cinto:* ${productoActivo.nombre}\n` +
         `*Color:* ${colorSeleccionado}\n` +
         `*Precio:* $${productoActivo.precio.toLocaleString("es-AR")}\n` +
-        `*Ancho:* ${productoActivo.paso} cm\n` +
+        `*Ancho:* ${textoAncho()}\n` +
         `*Talle:* ${talle} cm\n` +
         `*Hebilla:* ${hebilla}\n\n` +
         `📷 *Foto del producto:* ${foto}\n\n` +
