@@ -13,10 +13,19 @@
 
   "puestos": [
     {
-      "nombre": "COMPLETAR: nombre de la feria",
+      "nombre": "COMPLETAR: nombre de la primera feria",
       "direccion": "COMPLETAR: calle y número, localidad",
       "dias": "COMPLETAR: ej. Sábados y domingos",
       "horario": "COMPLETAR: ej. 10 a 19 h",
+      "nota": "",
+      "coordenadas": "",
+      "mapa": true
+    },
+    {
+      "nombre": "COMPLETAR: nombre de la segunda feria",
+      "direccion": "COMPLETAR: calle y número, localidad",
+      "dias": "COMPLETAR: ej. Domingos",
+      "horario": "COMPLETAR: ej. 11 a 18 h",
       "nota": "",
       "coordenadas": "",
       "mapa": true
