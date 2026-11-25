@@ -70,10 +70,13 @@ fetch("data/puesto.json")
         // Puestos
         document.getElementById("puestos").innerHTML = (info.puestos || []).map(p => {
             const direccionOk = p.direccion && !pendiente(p.direccion);
-            const q = encodeURIComponent(p.direccion || "");
+            // Si hay coordenadas, el mapa y "Cómo llegar" usan eso (más preciso); si no, la dirección
+            const coords = (p.coordenadas || "").replace(/\s+/g, "");
+            const ubicacionOk = !!coords || direccionOk;
+            const q = encodeURIComponent(coords || p.direccion || "");
             return `
             <article class="puesto-card">
-                ${p.mapa && direccionOk ? `
+                ${p.mapa && ubicacionOk ? `
                 <iframe class="puesto-mapa" src="https://maps.google.com/maps?q=${q}&z=16&output=embed"
                     loading="lazy" referrerpolicy="no-referrer-when-downgrade"
                     title="Mapa: ${esc(p.nombre)}"></iframe>` : ""}
@@ -94,7 +97,7 @@ fetch("data/puesto.json")
                         </li>
                     </ul>
                     ${p.nota ? `<p class="puesto-nota">${esc(p.nota)}</p>` : ""}
-                    ${direccionOk ? `
+                    ${ubicacionOk ? `
                     <a class="btn btn-primario btn-chico" target="_blank" rel="noopener"
                        href="https://www.google.com/maps/search/?api=1&query=${q}">Cómo llegar</a>` : ""}
                 </div>
