@@ -9,6 +9,8 @@
         // GitHub Pages muestra esta página para cualquier dirección que no existe.
         // 1) Calcula la raíz del sitio (en github.io es /La_Cinteria_Web/).
         // 2) Si alguien entra con un link viejo (grupo-25.html, etc.), lo manda a la página nueva.
+        // 3) Si falta la página de un modelo o color (modelos/<id>/<color>.html) porque no se
+        //    corrió herramientas/generar-modelos.js, lo manda a la plantilla producto.html.
         var raiz = location.hostname.endsWith("github.io")
             ? "/" + location.pathname.split("/")[1] + "/"
             : "/";
@@ -17,8 +19,12 @@
             "grupo-30c": "30-cocido", "grupo-35c": "35-cocido", "grupo-circulos": "circulos"
         };
         var m = location.pathname.match(/(grupo-[a-z0-9]+)\.html$/i);
+        var mod = location.pathname.match(/\/modelos\/([^\/]+)\/(?:([^\/]+?)(?:\.html)?)?$/i);
         if (m && viejos[m[1].toLowerCase()]) {
-            location.replace(raiz + "producto.html?modelo=" + viejos[m[1].toLowerCase()]);
+            location.replace(raiz + "modelos/" + viejos[m[1].toLowerCase()] + "/");
+        } else if (mod) {
+            location.replace(raiz + "producto.html?modelo=" + mod[1] +
+                (mod[2] && mod[2] !== "index" ? "&color=" + mod[2] : ""));
         }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Lato:wght@400;700&family=Parisienne&display=swap" rel="stylesheet">

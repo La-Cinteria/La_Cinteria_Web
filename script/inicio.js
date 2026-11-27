@@ -9,7 +9,7 @@ fetch("data/productos.json")
         document.getElementById("modelosGrid").innerHTML = productos.map(p => {
             const titulo = p.titulo_tarjeta || `Paso ${p.paso} cm`;
             return `
-            <a href="producto.html?modelo=${encodeURIComponent(p.id)}" class="category-card">
+            <a href="${urlModelo(p.id)}" class="category-card">
                 <div class="category-img">
                     <img src="${esc(p.portada)}" alt="${esc(p.nombre)}" loading="lazy" width="900" height="900">
                 </div>
@@ -44,11 +44,9 @@ fetch("data/puesto.json")
             (info.en_el_puesto || []).map(t => `<li>${esc(t)}</li>`).join("");
 
         // Instagram (solo si está cargado)
-        if (info.instagram) {
+        if (linkInstagram(info.instagram)) {
             const ig = document.getElementById("linkInstagram");
-            ig.href = info.instagram.startsWith("http")
-                ? info.instagram
-                : `https://instagram.com/${info.instagram.replace(/^@/, "")}`;
+            ig.href = linkInstagram(info.instagram);
             ig.hidden = false;
         }
 

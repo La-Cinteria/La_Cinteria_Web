@@ -1,5 +1,8 @@
 // =========================================
-//  PÁGINA DE PRODUCTO — producto.html?modelo=<id>
+//  FICHA DE PRODUCTO
+//  Funciona de dos formas:
+//   - modelos/<id>/<color>.html  (páginas generadas, con su propia vista previa al compartir)
+//   - producto.html?modelo=<id>&color=<color>  (la plantilla, sigue andando por si acaso)
 //  El <id> es el campo "id" de cada modelo en data/productos.json
 // =========================================
 
@@ -12,7 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let hebilla = "";
 
     const $ = id => document.getElementById(id);
-    const idModelo = new URLSearchParams(location.search).get("modelo");
+    const params = new URLSearchParams(location.search);
+    const idModelo = document.body.dataset.modelo || params.get("modelo");
+    const colorPedido = document.body.dataset.color || params.get("color") || "";
 
     // ── Cargar productos ──────────────────────────────
     fetch("data/productos.json")
@@ -28,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            colorSeleccionado = producto.colores[0].nombre;
+            colorSeleccionado = colorInicial();
             iniciarPagina();
             actualizarUI();
             renderOtrosModelos();
@@ -37,9 +42,17 @@ document.addEventListener("DOMContentLoaded", () => {
             Object.values(producto.fotos).flat().forEach(src => { new Image().src = src; });
         });
 
+    // El color de la dirección; si no hay, el de la foto de portada; si no, el primero.
+    function colorInicial() {
+        const colores = producto.colores;
+        const porDireccion = colores.find(c => slug(c.nombre) === slug(colorPedido));
+        if (porDireccion) return porDireccion.nombre;
+        const dePortada = colores.find(c => (producto.fotos[c.nombre] || []).includes(producto.portada));
+        return (dePortada || colores[0]).nombre;
+    }
+
     // ── Datos fijos del modelo (se arman una vez) ─────
     function iniciarPagina() {
-        document.title = `${producto.nombre} — La Cintería`;
         document.querySelector('meta[name="description"]')
             .setAttribute("content", `${producto.nombre}, de cuero 100% vacuno, hecho a medida. Elegí color y hebilla.`);
 
@@ -50,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Hebillas desde el JSON
         const hebillas = producto.hebillas || ["Bronce", "Plateada"];
         $("hebillas").innerHTML = hebillas.map(h => `
-            <label class="pill ${esc(h.toLowerCase())}">
+            <label class="pill ${esc(slug(h))}">
                 <input type="radio" name="hebilla" value="${esc(h)}">
                 <span>${esc(h)}</span>
             </label>`).join("");
@@ -63,8 +76,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // ── Lo que cambia al elegir color ─────────────────
     function actualizarUI() {
         $("prodColor").textContent = colorSeleccionado;
+        document.title = `${producto.nombre} ${colorSeleccionado} — La Cintería`;
 
-        $("slides").innerHTML = `<img src="${esc(producto.fotos[colorSeleccionado][0])}" class="slide active"
+        $("slides").innerHTML = `<img src="${esc(fotoActual())}" class="slide active"
             alt="${esc(producto.nombre)} color ${esc(colorSeleccionado)}" draggable="false">`;
 
         $("dots").innerHTML = producto.colores.map(c => `
@@ -77,8 +91,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 data-color="${esc(c.nombre)}"></button>`).join("");
     }
 
+    const fotoActual = () => producto.fotos[colorSeleccionado][0];
+    const urlActual = () => new URL(urlModelo(producto.id, colorSeleccionado), document.baseURI).href;
+
     function textoAncho() {
         return typeof producto.paso === "number" ? `${producto.paso} cm` : String(producto.paso);
+    }
+
+    // Al elegir otro color, la dirección pasa a ser la de ese color:
+    // así, si copian el link o lo comparten, la vista previa muestra ese cinto.
+    function elegirColor(nombre) {
+        colorSeleccionado = nombre;
+        actualizarUI();
+        if (location.protocol.startsWith("http")) history.replaceState(null, "", urlActual());
     }
 
     // ── Otros modelos ─────────────────────────────────
@@ -86,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const otros = productos.filter(p => p.id !== producto.id);
         if (!otros.length) return;
         $("otrosGrid").innerHTML = otros.map(p => `
-            <a href="producto.html?modelo=${encodeURIComponent(p.id)}" class="otro-card">
+            <a href="${urlModelo(p.id)}" class="otro-card">
                 <img src="${esc(p.portada)}" alt="${esc(p.nombre)}" loading="lazy">
                 <span class="otro-tipo">${esc(p.tipo)}</span>
                 <span class="otro-nombre">${esc(p.titulo_tarjeta || `Paso ${p.paso} cm`)}</span>
@@ -98,26 +123,25 @@ document.addEventListener("DOMContentLoaded", () => {
     function moverColor(paso) {
         const colores = producto.colores;
         const i = colores.findIndex(c => c.nombre === colorSeleccionado);
-        colorSeleccionado = colores[(i + paso + colores.length) % colores.length].nombre;
-        actualizarUI();
+        elegirColor(colores[(i + paso + colores.length) % colores.length].nombre);
     }
 
     $("dots").addEventListener("click", e => {
         const dot = e.target.closest(".dot");
-        if (!dot) return;
-        colorSeleccionado = dot.dataset.color;
-        actualizarUI();
+        if (dot) elegirColor(dot.dataset.color);
     });
     $("btnAnterior").addEventListener("click", () => moverColor(-1));
     $("btnSiguiente").addEventListener("click", () => moverColor(1));
 
     const slider = document.querySelector(".slider");
     let startX = null;
+    let huboArrastre = false;      // para que deslizar no abra el zoom
     const empezar = x => { startX = x; };
     const terminar = x => {
         if (startX === null || !producto) return;
         const dif = x - startX;
         startX = null;
+        huboArrastre = Math.abs(dif) >= 10;
         if (Math.abs(dif) >= 40) moverColor(dif > 0 ? -1 : 1);
     };
     slider.addEventListener("touchstart", e => empezar(e.touches[0].clientX), { passive: true });
@@ -126,78 +150,91 @@ document.addEventListener("DOMContentLoaded", () => {
     slider.addEventListener("mouseup", e => terminar(e.clientX));
     slider.addEventListener("mouseleave", () => { startX = null; });
 
+    // ── Zoom de la foto ───────────────────────────────
+    // Tocar la foto la abre en grande; ahí, tocar acerca (en el punto tocado)
+    // y mover el mouse o el dedo recorre la foto. Tocar de nuevo aleja.
+    const zoom = $("zoom");
+    const zoomImg = $("zoomImg");
+
+    function abrirZoom() {
+        if (!producto) return;
+        zoomImg.src = fotoActual();
+        zoomImg.alt = `${producto.nombre} color ${colorSeleccionado}`;
+        zoom.classList.remove("ampliada");
+        zoom.hidden = false;
+        document.body.style.overflow = "hidden";
+        $("zoomCerrar").focus();
+    }
+
+    function cerrarZoom() {
+        zoom.hidden = true;
+        document.body.style.overflow = "";
+        $("btnZoom").focus();
+    }
+
+    // Centra el acercamiento en el punto donde está el mouse o el dedo
+    function enfocar(e) {
+        const r = $("zoomMarco").getBoundingClientRect();
+        const x = Math.min(100, Math.max(0, (e.clientX - r.left) / r.width * 100));
+        const y = Math.min(100, Math.max(0, (e.clientY - r.top) / r.height * 100));
+        zoomImg.style.transformOrigin = `${x}% ${y}%`;
+    }
+
+    $("slides").addEventListener("click", () => {
+        if (huboArrastre) { huboArrastre = false; return; }
+        abrirZoom();
+    });
+    $("btnZoom").addEventListener("click", abrirZoom);
+    $("zoomCerrar").addEventListener("click", cerrarZoom);
+    zoom.addEventListener("click", e => { if (e.target === zoom) cerrarZoom(); });
+    zoomImg.addEventListener("click", e => {
+        enfocar(e);
+        zoom.classList.toggle("ampliada");
+    });
+    zoomImg.addEventListener("pointermove", e => {
+        if (zoom.classList.contains("ampliada")) enfocar(e);
+    });
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape" && !zoom.hidden) cerrarZoom();
+    });
+
+    // ── Compartir ─────────────────────────────────────
+    $("btnCompartir").addEventListener("click", async () => {
+        if (!producto) return;
+        const datos = {
+            title: `${producto.nombre} — La Cintería`,
+            text: `Mirá este cinto: ${producto.nombre}, color ${colorSeleccionado}`,
+            url: urlActual(),
+        };
+        if (navigator.share) {
+            try { await navigator.share(datos); } catch { /* lo cancelaron */ }
+            return;
+        }
+        try {
+            await navigator.clipboard.writeText(datos.url);
+            mostrarAviso("Link copiado. Ya lo podés pegar donde quieras.");
+        } catch {
+            window.open(`https://wa.me/?text=${encodeURIComponent(`${datos.text} ${datos.url}`)}`, "_blank");
+        }
+    });
+
     // =================================================
-    //  VALIDACIONES
+    //  VALIDACIONES (talle y hebilla)
     // =================================================
     const TALLE_MIN = 40;
     const TALLE_MAX = 200;
 
-    const soloDigitos = v => v.replace(/\D/g, "");
+    function validarTalle() {
+        const v = $("talle").value.trim();
+        const n = Number(v);
+        let msg = "";
+        if (!v) msg = "Ingresá tu talle.";
+        else if (!Number.isInteger(n)) msg = "Usá un número entero, sin comas.";
+        else if (n < TALLE_MIN || n > TALLE_MAX) msg = `El talle tiene que estar entre ${TALLE_MIN} y ${TALLE_MAX} cm.`;
 
-    // Cada regla devuelve "" si está bien, o el mensaje de error.
-    const reglas = {
-        talle: v => {
-            if (!v) return "Ingresá tu talle.";
-            const n = Number(v);
-            if (!Number.isInteger(n)) return "Usá un número entero, sin comas.";
-            if (n < TALLE_MIN || n > TALLE_MAX) return `El talle tiene que estar entre ${TALLE_MIN} y ${TALLE_MAX} cm.`;
-            return "";
-        },
-        nombre: v => {
-            if (!v) return "Ingresá tu nombre y apellido.";
-            if (!/^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ' .-]+$/.test(v)) return "Usá solo letras.";
-            if (v.split(/\s+/).filter(Boolean).length < 2) return "Ingresá nombre y apellido.";
-            return "";
-        },
-        dni: v => {
-            if (!v) return "Ingresá tu DNI.";
-            if (!/^[\d.\s]+$/.test(v)) return "Usá solo números.";
-            const d = soloDigitos(v);
-            if (d.length < 7 || d.length > 8) return "El DNI tiene 7 u 8 números.";
-            return "";
-        },
-        telefono: v => {
-            if (!v) return "Ingresá tu teléfono.";
-            if (!/^[\d\s()+-]+$/.test(v)) return "Usá solo números.";
-            const d = soloDigitos(v);
-            if (d.length < 8 || d.length > 13) return "Revisá el número (con código de área, ej: 11 1234-5678).";
-            return "";
-        },
-        calle: v => {
-            if (!v) return "Ingresá la calle.";
-            if (v.length < 2) return "Revisá la calle.";
-            return "";
-        },
-        numero: v => {
-            if (!v) return "Ingresá el número.";
-            if (!/^\d{1,5}$/.test(v) && !/^s\/?n$/i.test(v)) return "Solo números, o S/N.";
-            return "";
-        },
-        piso: v => v.length > 15 ? "Demasiado largo." : "",
-        localidad: v => {
-            if (!v) return "Ingresá la localidad.";
-            if (v.length < 2) return "Revisá la localidad.";
-            return "";
-        },
-        provincia: v => v ? "" : "Elegí la provincia.",
-        cp: v => {
-            if (!v) return "Ingresá el código postal.";
-            // 4 números (1414) o el formato nuevo (C1414ABC)
-            if (!/^\d{4}$/.test(v) && !/^[A-Za-z]\d{4}[A-Za-z]{3}$/.test(v)) return "Usá 4 números (ej: 1414) o el formato C1414ABC.";
-            return "";
-        },
-    };
-
-    const camposForm = ["nombre", "dni", "telefono", "calle", "numero", "piso", "localidad", "provincia", "cp"];
-    const inputDe = k => k === "talle" ? $("talle") : $(`f_${k}`);
-    const valorDe = k => inputDe(k).value.trim();
-
-    function validarCampo(k) {
-        const msg = reglas[k](valorDe(k));
-        const input = inputDe(k);
-        $(`err_${k}`).textContent = msg;
-        input.classList.toggle("invalido", !!msg);
-        input.setAttribute("aria-invalid", msg ? "true" : "false");
+        $("err_talle").textContent = msg;
+        $("talle").classList.toggle("invalido", !!msg);
+        $("talle").setAttribute("aria-invalid", msg ? "true" : "false");
         return !msg;
     }
 
@@ -207,19 +244,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return !msg;
     }
 
-    // Validar al salir del campo; si ya tenía error, revalidar mientras escribe
-    ["talle", ...camposForm].forEach(k => {
-        const input = inputDe(k);
-        input.addEventListener("blur", () => { if (input.value.trim()) validarCampo(k); });
-        input.addEventListener(k === "provincia" ? "change" : "input", () => {
-            if (input.classList.contains("invalido")) validarCampo(k);
-        });
-    });
-
-    // El DNI solo acepta números al escribir
-    $("f_dni").addEventListener("input", e => {
-        e.target.value = soloDigitos(e.target.value).slice(0, 8);
-    });
+    $("talle").addEventListener("blur", () => { if ($("talle").value.trim()) validarTalle(); });
+    $("talle").addEventListener("input", () => { if ($("talle").classList.contains("invalido")) validarTalle(); });
 
     $("hebillas").addEventListener("change", e => {
         if (e.target.name === "hebilla") {
@@ -229,72 +255,35 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // =================================================
-    //  MODAL
+    //  CARRITO
     // =================================================
-    function abrirModal() {
-        const talleOk = validarCampo("talle");
+    function agregarAlCarrito() {
+        if (!producto) return false;
+        const talleOk = validarTalle();
         const hebillaOk = validarHebilla();
-        if (!talleOk) { $("talle").focus(); return; }
-        if (!hebillaOk) return;
+        if (!talleOk) { $("talle").focus(); return false; }
+        if (!hebillaOk) { document.querySelector('#hebillas input')?.focus(); return false; }
 
-        $("pedidoResumen").innerHTML = `
-            <p><strong>Tu pedido</strong></p>
-            <p>${esc(producto.nombre)} · Color ${esc(colorSeleccionado)} · Hebilla ${esc(hebilla)} · Talle ${esc(valorDe("talle"))} cm</p>
-            <p class="resumen-precio">${esc(formatearPrecio(producto.precio))}</p>`;
-
-        $("modal").hidden = false;
-        document.body.style.overflow = "hidden";
-        setTimeout(() => $("f_nombre").focus(), 50);
+        Carrito.agregar({
+            modelo: producto.id,
+            nombre: producto.nombre,
+            ancho: textoAncho(),
+            color: colorSeleccionado,
+            hebilla,
+            talle: Number($("talle").value),
+            precio: producto.precio,
+            foto: fotoActual(),
+        });
+        return true;
     }
 
-    function cerrarModal() {
-        $("modal").hidden = true;
-        document.body.style.overflow = "";
-        $("btn-comprar").focus();
-    }
-
-    $("btn-comprar").addEventListener("click", abrirModal);
-    $("cerrarModal").addEventListener("click", cerrarModal);
-    $("modal").addEventListener("click", e => { if (e.target === e.currentTarget) cerrarModal(); });
-    document.addEventListener("keydown", e => {
-        if (e.key === "Escape" && !$("modal").hidden) cerrarModal();
+    $("btnAgregar").addEventListener("click", () => {
+        if (!agregarAlCarrito()) return;
+        const n = Carrito.cantidadTotal();
+        mostrarAviso(`✓ Agregado al carrito · <a href="carrito.html">Ver carrito (${n})</a>`);
     });
 
-    // =================================================
-    //  ENVIAR POR WHATSAPP
-    // =================================================
-    $("formPedido").addEventListener("submit", e => {
-        e.preventDefault();
-
-        const invalidos = camposForm.filter(k => !validarCampo(k));
-        if (invalidos.length) {
-            const primero = inputDe(invalidos[0]);
-            primero.focus();
-            primero.scrollIntoView({ behavior: "smooth", block: "center" });
-            return;
-        }
-
-        const d = Object.fromEntries(camposForm.map(k => [k, valorDe(k)]));
-        const foto = document.querySelector(".slide.active")?.src || "";
-
-        const msg =
-            `🛍️ *NUEVO PEDIDO - La Cintería*\n\n` +
-            `*Cinto:* ${producto.nombre}\n` +
-            `*Color:* ${colorSeleccionado}\n` +
-            `*Precio:* ${formatearPrecio(producto.precio)}\n` +
-            `*Ancho:* ${textoAncho()}\n` +
-            `*Talle:* ${valorDe("talle")} cm\n` +
-            `*Hebilla:* ${hebilla}\n\n` +
-            `📷 *Foto del producto:* ${foto}\n\n` +
-            `📦 *Datos de envío:*\n` +
-            `*Nombre:* ${d.nombre}\n` +
-            `*DNI:* ${soloDigitos(d.dni)}\n` +
-            `*Teléfono:* ${d.telefono}\n` +
-            `*Dirección:* ${d.calle} ${d.numero.toUpperCase()}${d.piso ? `, Piso/Depto: ${d.piso}` : ""}\n` +
-            `*Localidad:* ${d.localidad}\n` +
-            `*Provincia:* ${d.provincia}\n` +
-            `*Código Postal:* ${d.cp.toUpperCase()}`;
-
-        window.open(linkWhatsApp(msg), "_blank");
+    $("btnComprarYa").addEventListener("click", () => {
+        if (agregarAlCarrito()) location.href = new URL("carrito.html", document.baseURI).href;
     });
 });

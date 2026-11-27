@@ -173,6 +173,112 @@ header::after{
   stroke:var(--cuero);
 }
 
+/* ===== BOTÓN CARRITO (arriba a la derecha) ===== */
+.carrito-btn{
+  position:absolute;
+  right:20px;
+  top:45px;
+  transform:translateY(-50%);
+  z-index:2;
+
+  width:44px;
+  height:44px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  background:rgba(255,255,255,.1);
+  border:1.5px solid rgba(243,230,214,.6);
+  border-radius:50%;
+
+  transition:background .2s ease, transform .2s ease;
+}
+
+.carrito-btn svg{
+  width:22px;
+  height:22px;
+  stroke:#f3e6d6;
+  transition:stroke .2s ease;
+}
+
+.carrito-btn:hover{
+  background:#f3e6d6;
+  transform:translateY(-50%) scale(1.06);
+}
+
+.carrito-btn:hover svg{
+  stroke:var(--cuero);
+}
+
+.carrito-cant{
+  position:absolute;
+  top:-6px;
+  right:-6px;
+  min-width:21px;
+  height:21px;
+  padding:0 5px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:999px;
+  background:var(--caramelo-claro);
+  color:var(--cuero-oscuro);
+  box-shadow:0 0 0 2px var(--cuero);
+
+  font-size:12px;
+  font-weight:700;
+  line-height:1;
+}
+
+/* ===== AVISO (cartelito abajo) ===== */
+.aviso{
+  position:fixed;
+  left:50%;
+  bottom:24px;
+  z-index:1100;
+  max-width:calc(100% - 32px);
+
+  padding:13px 22px;
+  border-radius:999px;
+  background:var(--cuero-oscuro);
+  color:#f3e6d6;
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
+
+  font-size:15px;
+  font-weight:700;
+  text-align:center;
+
+  opacity:0;
+  pointer-events:none;
+  transform:translate(-50%, 16px);
+  transition:opacity .25s ease, transform .25s ease;
+}
+
+.aviso.visible{
+  opacity:1;
+  pointer-events:auto;
+  transform:translate(-50%, 0);
+}
+
+.aviso a{
+  color:var(--caramelo-claro);
+  margin-left:4px;
+}
+
+/* ===== ERRORES DE FORMULARIO ===== */
+.error{
+  margin-top:4px;
+  font-size:12px;
+  font-weight:700;
+  color:#b3361b;
+}
+
+.error:empty{
+  display:none;
+}
+
 /* ===== CONTAINER ===== */
 .container{
   width:min(100%,1180px);
@@ -380,6 +486,23 @@ header::after{
     left:12px;
     width:38px;
     height:38px;
+  }
+
+  .carrito-btn{
+    top:34px;
+    right:12px;
+    width:38px;
+    height:38px;
+  }
+
+  .carrito-btn svg{
+    width:19px;
+    height:19px;
+  }
+
+  .aviso{
+    bottom:86px;
+    font-size:14px;
   }
 }
 

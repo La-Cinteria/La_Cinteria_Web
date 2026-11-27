@@ -1,0 +1,63 @@
+# =========================================
+#  Genera las páginas de cada cinto automáticamente
+#
+#  Cada vez que se suben cambios a main o dev que tocan los productos, la plantilla,
+#  las fotos o el generador, GitHub corre herramientas/generar-modelos.js y guarda
+#  el resultado (modelos/, image/og/ y sitemap.xml) en la misma rama.
+#
+#  IMPORTANTE: como GitHub agrega un commit propio, después de subir cambios hacé
+#  "git pull" antes de seguir trabajando (si no, el próximo "git push" te lo va a pedir).
+#
+#  Se puede ver si anduvo en la pestaña "Actions" del repositorio en GitHub, y
+#  también correrlo a mano desde ahí con el botón "Run workflow".
+# =========================================
+name: Generar páginas de modelos
+
+on:
+  push:
+    branches: [main, dev]
+    paths:
+      - "data/productos.json"
+      - "producto.html"
+      - "image/**"
+      - "herramientas/**"
+      - ".github/workflows/generar-modelos.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Si se suben dos cambios seguidos, que no corran a la vez en la misma rama
+concurrency:
+  group: generar-modelos-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  generar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Bajar el proyecto
+        uses: actions/checkout@v4
+
+      - name: Preparar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Instalar el conversor de fotos (sharp)
+        run: npm install --no-save --no-package-lock sharp@0.34
+
+      - name: Generar páginas
+        run: node herramientas/generar-modelos.js
+
+      - name: Guardar los cambios (si hubo)
+        run: |
+          git add -A modelos image/og sitemap.xml
+          if git diff --cached --quiet; then
+            echo "Las páginas ya estaban al día, no hay nada que guardar."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Actualiza páginas de modelos (automático)"
+          git push

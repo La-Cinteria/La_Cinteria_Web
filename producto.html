@@ -3,9 +3,16 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- El título y la descripción se reemplazan con los del modelo al cargar -->
+        <!--
+            Esta página es la PLANTILLA de la ficha de cada cinto.
+            Las páginas de modelos/ se generan a partir de esta con:  node herramientas/generar-modelos.js
+            (así cada cinto tiene su propia vista previa al compartirlo por WhatsApp).
+            Si cambiás algo acá o en data/productos.json, volvé a correr ese comando.
+        -->
         <title>Cintos de cuero — La Cintería</title>
         <meta name="description" content="Cintos artesanales de cuero 100% vacuno hechos a medida.">
+        <!-- La plantilla no se muestra en Google; las páginas de modelos/ sí (el generador saca esta línea) -->
+        <meta name="robots" content="noindex">
         <meta name="theme-color" content="#5e361b">
 
         <!-- Vista previa al compartir -->
@@ -45,6 +52,11 @@
                 <a href="index.html#nosotros">Nosotros</a>
                 <a href="index.html#donde">Dónde estamos</a>
             </nav>
+
+            <a href="carrito.html" class="carrito-btn" aria-label="Ver carrito">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg>
+                <span class="carrito-cant" data-carrito-cant hidden>0</span>
+            </a>
         </header>
 
         <!-- ===== CONTENIDO PRINCIPAL ===== -->
@@ -67,10 +79,18 @@
                         <button class="slider-btn prev" id="btnAnterior" aria-label="Color anterior">❮</button>
                         <div class="slides" id="slides"></div>
                         <button class="slider-btn next" id="btnSiguiente" aria-label="Color siguiente">❯</button>
+                        <button type="button" class="btn-zoom" id="btnZoom" aria-label="Ampliar foto">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21M10.5 7.5v6M7.5 10.5h6"/></svg>
+                        </button>
                     </div>
 
                     <p class="color-titulo">Color: <strong id="prodColor"></strong></p>
                     <div class="dots" id="dots"></div>
+
+                    <button type="button" class="btn-compartir" id="btnCompartir">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.7l7.4-4.3M8.3 13.3l7.4 4.3"/></svg>
+                        Compartir este cinto
+                    </button>
                 </div>
 
                 <!-- INFO -->
@@ -92,6 +112,54 @@
                             <span>cm</span>
                         </div>
                         <span class="error" id="err_talle"></span>
+
+                        <!-- Guía para sacar el talle -->
+                        <details class="guia-talle">
+                            <summary>¿Cómo saco mi talle?</summary>
+                            <div class="guia-contenido">
+                                <svg class="guia-dibujo" viewBox="0 0 540 190" role="img"
+                                     aria-label="Cinto estirado: el talle se mide desde la hebilla hasta el agujero que usás">
+                                    <!-- Textos de arriba -->
+                                    <text x="22" y="26" text-anchor="start" class="g-texto">Desde la hebilla</text>
+                                    <text x="534" y="26" text-anchor="end" class="g-texto">Hasta el agujero que usás</text>
+                                    <path d="M56 34v16M420 34v16" class="g-guia"/>
+
+                                    <!-- Correa -->
+                                    <path d="M56 58h440l26 22-26 22H56z" class="g-cuero"/>
+                                    <path d="M62 64h432l19 16-19 16H62" class="g-costura"/>
+
+                                    <!-- Agujeros -->
+                                    <circle cx="360" cy="80" r="5.5" class="g-agujero"/>
+                                    <circle cx="390" cy="80" r="5.5" class="g-agujero"/>
+                                    <circle cx="420" cy="80" r="5.5" class="g-agujero"/>
+                                    <circle cx="450" cy="80" r="5.5" class="g-agujero"/>
+                                    <circle cx="480" cy="80" r="5.5" class="g-agujero"/>
+                                    <circle cx="420" cy="80" r="12" class="g-marca"/>
+
+                                    <!-- Hebilla -->
+                                    <rect x="22" y="44" width="56" height="72" rx="12" class="g-hebilla"/>
+                                    <path d="M56 80h40" class="g-diente"/>
+
+                                    <!-- Medida -->
+                                    <path d="M56 116v34M420 102v48" class="g-guia"/>
+                                    <path d="M62 142h352" class="g-medida"/>
+                                    <path d="M70 135l-9 7 9 7M406 135l9 7-9 7" class="g-medida"/>
+                                    <text x="238" y="176" text-anchor="middle" class="g-texto g-fuerte">Tu talle (ej: 95 cm)</text>
+                                </svg>
+
+                                <ol class="guia-pasos">
+                                    <li>Buscá un cinto que ya uses y te quede cómodo.</li>
+                                    <li>Estiralo sobre una mesa.</li>
+                                    <li>Medí con un centímetro <strong>desde donde se dobla el cuero en la hebilla hasta el agujero que más usás</strong>. Ese número es tu talle.</li>
+                                </ol>
+                                <p class="guia-extra">
+                                    <strong>¿No tenés un cinto para medir?</strong> Rodeá tu cintura con el centímetro, por encima del pantalón y a la altura donde lo usás.
+                                </p>
+                                <p class="guia-extra">
+                                    ¿Te quedan dudas? <a data-wa="¡Hola! Quiero hacer un pedido pero no sé bien mi talle, ¿me ayudan?" href="#">Escribinos y te ayudamos</a>.
+                                </p>
+                            </div>
+                        </details>
                     </div>
 
                     <!-- HEBILLA (las opciones salen del JSON) -->
@@ -102,8 +170,9 @@
                     </fieldset>
 
                     <!-- COMPRAR -->
-                    <button id="btn-comprar">Comprar</button>
-                    <p class="nota-compra">Completás tus datos y confirmás el pedido por WhatsApp.</p>
+                    <button type="button" id="btnAgregar" class="btn-comprar">Agregar al carrito</button>
+                    <button type="button" id="btnComprarYa" class="btn btn-secundario btn-ancho">Comprar ahora</button>
+                    <p class="nota-compra">Podés sumar varios cintos y mandar un solo pedido por WhatsApp.</p>
 
                 </div>
             </section>
@@ -114,101 +183,13 @@
                 <div class="otros-grid" id="otrosGrid"></div>
             </section>
 
-            <!-- MODAL FORMULARIO -->
-            <div id="modal" class="modal-overlay" hidden>
-                <form class="modal-box" id="formPedido" role="dialog" aria-modal="true" aria-labelledby="modalTitulo" novalidate>
-                    <div class="modal-header">
-                        <h3 id="modalTitulo">Datos de envío</h3>
-                        <button type="button" id="cerrarModal" class="modal-cerrar" aria-label="Cerrar">✕</button>
-                    </div>
-
-                    <div class="pedido-resumen" id="pedidoResumen"></div>
-
-                    <div class="modal-body">
-                        <div class="campo">
-                            <label for="f_nombre">Nombre y apellido *</label>
-                            <input type="text" id="f_nombre" placeholder="Juan García" autocomplete="name" maxlength="60">
-                            <span class="error" id="err_nombre"></span>
-                        </div>
-                        <div class="campo-grupo">
-                            <div class="campo">
-                                <label for="f_dni">DNI *</label>
-                                <input type="text" id="f_dni" placeholder="30123456" inputmode="numeric" maxlength="10">
-                                <span class="error" id="err_dni"></span>
-                            </div>
-                            <div class="campo">
-                                <label for="f_telefono">Teléfono *</label>
-                                <input type="tel" id="f_telefono" placeholder="11 1234-5678" autocomplete="tel" maxlength="20">
-                                <span class="error" id="err_telefono"></span>
-                            </div>
-                        </div>
-                        <p class="campo-ayuda">Tu DNI y teléfono se usan solo para hacer el envío.</p>
-                        <div class="campo">
-                            <label for="f_calle">Calle *</label>
-                            <input type="text" id="f_calle" placeholder="Av. Corrientes" autocomplete="address-line1" maxlength="60">
-                            <span class="error" id="err_calle"></span>
-                        </div>
-                        <div class="campo-grupo">
-                            <div class="campo">
-                                <label for="f_numero">Número *</label>
-                                <input type="text" id="f_numero" placeholder="1234 o S/N" maxlength="6">
-                                <span class="error" id="err_numero"></span>
-                            </div>
-                            <div class="campo">
-                                <label for="f_piso">Piso / Depto</label>
-                                <input type="text" id="f_piso" placeholder="3° B (opcional)" autocomplete="address-line2" maxlength="15">
-                                <span class="error" id="err_piso"></span>
-                            </div>
-                        </div>
-                        <div class="campo">
-                            <label for="f_localidad">Localidad *</label>
-                            <input type="text" id="f_localidad" placeholder="Villa Urquiza" autocomplete="address-level2" maxlength="50">
-                            <span class="error" id="err_localidad"></span>
-                        </div>
-                        <div class="campo-grupo">
-                            <div class="campo">
-                                <label for="f_provincia">Provincia *</label>
-                                <select id="f_provincia" autocomplete="address-level1">
-                                    <option value="">Elegí…</option>
-                                    <option>CABA</option>
-                                    <option>Buenos Aires</option>
-                                    <option>Catamarca</option>
-                                    <option>Chaco</option>
-                                    <option>Chubut</option>
-                                    <option>Córdoba</option>
-                                    <option>Corrientes</option>
-                                    <option>Entre Ríos</option>
-                                    <option>Formosa</option>
-                                    <option>Jujuy</option>
-                                    <option>La Pampa</option>
-                                    <option>La Rioja</option>
-                                    <option>Mendoza</option>
-                                    <option>Misiones</option>
-                                    <option>Neuquén</option>
-                                    <option>Río Negro</option>
-                                    <option>Salta</option>
-                                    <option>San Juan</option>
-                                    <option>San Luis</option>
-                                    <option>Santa Cruz</option>
-                                    <option>Santa Fe</option>
-                                    <option>Santiago del Estero</option>
-                                    <option>Tierra del Fuego</option>
-                                    <option>Tucumán</option>
-                                </select>
-                                <span class="error" id="err_provincia"></span>
-                            </div>
-                            <div class="campo">
-                                <label for="f_cp">Código Postal *</label>
-                                <input type="text" id="f_cp" placeholder="1414" autocomplete="postal-code" maxlength="8">
-                                <span class="error" id="err_cp"></span>
-                            </div>
-                        </div>
-                        <button type="submit" id="btnEnviar" class="btn-whatsapp">
-                            Enviar pedido por WhatsApp
-                        </button>
-                        <p class="modal-nota">Se abrirá WhatsApp con todos los datos del pedido para confirmar.</p>
-                    </div>
-                </form>
+            <!-- FOTO AMPLIADA -->
+            <div class="zoom" id="zoom" hidden role="dialog" aria-modal="true" aria-label="Foto ampliada">
+                <button type="button" class="zoom-cerrar" id="zoomCerrar" aria-label="Cerrar">✕</button>
+                <div class="zoom-marco" id="zoomMarco">
+                    <img id="zoomImg" alt="" draggable="false">
+                </div>
+                <p class="zoom-ayuda">Tocá la foto para acercar · Tocá de nuevo para alejar</p>
             </div>
         </main>
 
