@@ -70,7 +70,7 @@
       "tipo": "Liso",
       "paso": 3,
       "nombre": "Cinto de cuero 3.0cm",
-      "precio": 20000,
+      "precio": 23000,
       "colores": [
         {
           "nombre": "negro",
@@ -135,7 +135,7 @@
       "tipo": "Liso",
       "paso": 3.5,
       "nombre": "Cinto de cuero 3.5cm",
-      "precio": 23000,
+      "precio": 25000,
       "colores": [
         {
           "nombre": "negro",
@@ -265,7 +265,7 @@
       "tipo": "Cocido",
       "paso": 3,
       "nombre": "Cinto de cuero cocido 3.0cm",
-      "precio": 23000,
+      "precio": 25000,
       "colores": [
         {
           "nombre": "negro cocido con negro",
@@ -295,7 +295,7 @@
       "tipo": "Cocido",
       "paso": 3.5,
       "nombre": "Cinto de cuero cocido 3.5cm",
-      "precio": 28000,
+      "precio": 30000,
       "colores": [
         {
           "nombre": "negro cocido con negro",

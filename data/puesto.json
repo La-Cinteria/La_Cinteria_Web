@@ -3,7 +3,6 @@
 
   "historia": [
     "En La Cintería hacemos cada cinto a mano, uno por uno, pensando en quien lo va a usar.",
-    "COMPLETAR (opcional): contá la historia del emprendimiento, desde cuándo lo hacen, quiénes son.",
     "Si no podés acercarte a una feria, lo pedís desde la web y te lo enviamos."
   ],
 
@@ -13,20 +12,18 @@
 
   "puestos": [
     {
-      "nombre": "COMPLETAR: nombre de la primera feria",
-      "direccion": "COMPLETAR: calle y número, localidad",
-      "dias": "COMPLETAR: ej. Sábados y domingos",
-      "horario": "COMPLETAR: ej. 10 a 19 h",
-      "nota": "",
+      "nombre": "Feria Palermo Viejo",
+      "direccion": "Costa Rica entre Armenia y Malabia (Feria Palermo Viejo)",
+      "dias": "Sábado, Domingo y feriados",
+      "horario": "De 10:00hs a 20:00hs",
       "coordenadas": "",
       "mapa": true
     },
     {
-      "nombre": "COMPLETAR: nombre de la segunda feria",
-      "direccion": "COMPLETAR: calle y número, localidad",
-      "dias": "COMPLETAR: ej. Domingos",
-      "horario": "COMPLETAR: ej. 11 a 18 h",
-      "nota": "",
+      "nombre": "Feria de Mataderos",
+      "direccion": "Av. de los Corrales, Av. Lisandro de la Torre",
+      "dias": "Solo domingo y fechas pátrias",
+      "horario": "De 11:00hs a 19:00hs",
       "coordenadas": "",
       "mapa": true
     }
@@ -38,5 +35,5 @@
     "Elegir entre todos los colores y hebillas"
   ],
 
-  "instagram": ""
+  "instagram": "https://www.instagram.com/la.cinteria/"
 }
